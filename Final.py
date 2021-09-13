@@ -7,17 +7,7 @@
 import os
 import argparse
 
-if os.path.isfile('soft_reads.fasta'):
-        os.remove('soft_reads.fasta')
-        
-if os.path.isfile('aln.fasta'):
-    os.remove('aln.fasta') 
-        
-if os.path.isfile('soft_reads.fasta'):
-    os.remove('soft_reads.fasta')
-    
-if os.path.isfile('mapped.sam'):
-    os.remove('mapped.sam')
+
 
 parser = argparse.ArgumentParser(description = "Find Integration site of inserted DNA sequences")
 parser.add_argument('-in1','--input_1', type=str, help='The NGS fastq file with the inserted gene as file.fq')
