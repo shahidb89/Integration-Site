@@ -75,7 +75,7 @@ def get_BLAT_seqs(input_1, input_2, inserted_seq):
     for seq in seq_list:
         temp = ''
         for l in seq:
-            if l in "-" or l in 'A' or l in 'C' or l in 'G' or l in 'T' :
+            if l in ["-", 'A', 'C', 'G', 'T'] :
                 temp +=l
         final_seq_list.append(temp)
 
