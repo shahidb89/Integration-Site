@@ -104,7 +104,11 @@ def get_BLAT_seqs(input_1, input_2, inserted_seq):
 # Cleaning the list
     del final_seq_list[0]
 
-# In the fasta file returned by ClustalO, all the sequences have the same length of characteres with empty spaces being given a (-), final_seq_list[0] is the reference sequence, here we are capturing the index were the soft-clipped sequences divide into to distinct subsequences, one aligned to the reference genome, and another aligned to the host genome. We do this for both ends of the reference sequence. Here the two ends of the reference sequence behave differently! So, each should be handled carefully! 
+# In the fasta file returned by ClustalO, all the sequences have the same length of characteres with empty 
+# spaces being given a (-), final_seq_list[0] is the reference sequence, here we are capturing the index 
+# were the soft-clipped sequences divide into to distinct subsequences, one aligned to the reference 
+# genome, and another aligned to the host genome. We do this for both ends of the reference sequence. 
+# Here the two ends of the reference sequence behave differently! So, each should be handled carefully! 
     start_index_5 = 0
     start_index_3 = 0
 
@@ -121,7 +125,10 @@ def get_BLAT_seqs(input_1, input_2, inserted_seq):
             c -= 1
         else:
             break
-# The final_seq_list is sorted so that the reference sequence comes in the middle and divides soft-clipped sequences to two. The first part are the sequences that align to the 3' (righ side) end of the reference sequences(list_of_3_seqs), and the last part are the sequences that align to the 5' (left side) of the reference sequence (list_of_5_seqs).
+# The final_seq_list is sorted so that the reference sequence comes in the middle and divides 
+# soft-clipped sequences to two. The first part are the sequences that align to the 3' (righ side) 
+# end of the reference sequences(list_of_3_seqs), and the last part are the sequences that align to 
+# the 5' (left side) of the reference sequence (list_of_5_seqs).
     final_seq_list.sort()
     for i, seq in enumerate(final_seq_list):
         if ref_seq in seq:
@@ -196,7 +203,8 @@ def get_BLAT_seqs(input_1, input_2, inserted_seq):
             a+=1
             b+=1
             c+=1
-# The following code captures the number of intermediatry sequences between a unique longest sequence returned and the refereces sequence. 
+# The following code captures the number of intermediatry sequences between a unique longest sequence 
+# returned and the refereces sequence. 
 
     l5_subseq_count = []
     l5 = list_of_5_seqs_cln_sorted
