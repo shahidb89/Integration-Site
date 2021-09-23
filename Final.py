@@ -23,12 +23,24 @@ args = parser.parse_args()
 
 def get_BLAT_seqs(input_1, input_2, inserted_seq):
     """This function perfoms multiple tasks as following:
-    1- It aligns fastq files obtained from Next Generation Sequencing NGS output to a referece sequence, that is the    sequence inserted into the genome being  passed through NGS, using short aligner program bbmap.
-    2- Then, it selects all the soft-clipped aligend reads and puts them into a file with the reference inserted sequence.
-    3- The file is then passed in Clustal Omega so that all the soft_clipped sequence are aligned to the reference sequence.
-    4- The results fasta file of the Clustal Omega aligning is then processed to return the uniqe longest overhanging sequences and a number with each returned sequnece which indicates the number of other sequences that are both aligned to the referenece sequence and at the same time contain subsequences of thr returned sequence. The greater the number, the more confident the result, as longest overhanging sequences have only a short part of them being aligned to the reference sequence. All the sequences are printed to the screen and a file named "BLAT_ready_seqs.txt". These sequences can be used in BLAT search to indictate the site of integration of the inserted sequence.
+    1- It aligns fastq files obtained from Next Generation Sequencing NGS output to a referece sequence, 
+     that is the    sequence inserted into the genome being  passed through NGS, using short aligner 
+     program bbmap.
+    2- Then, it selects all the soft-clipped aligend reads and puts them into a file with the reference 
+     inserted sequence.
+    3- The file is then passed in Clustal Omega so that all the soft_clipped sequence are aligned to the 
+     reference sequence.
+    4- The results fasta file of the Clustal Omega aligning is then processed to return the uniqe longest
+     overhanging sequences and a number with each returned sequnece which indicates the number of other
+     sequences that are both aligned to the referenece sequence and at the same time contain subsequences
+     of thr returned sequence. The greater the number, the more confident the result, as longest 
+     overhanging sequences have only a short part of them being aligned to the reference sequence.
+     All the sequences are printed to the screen and a file named "BLAT_ready_seqs.txt".
+     These sequences can be used in BLAT search to indictate the site of integration of the inserted 
+     sequence.
     
-    The function takes three inpute files. Two fastq files with .fq suffix(file.fq) and one fasta file of the reference seq with .fa suffix (ref.fa)
+    The function takes three inpute files. Two fastq files with .fq suffix(file.fq) and one fasta file 
+    of the reference seq with .fa suffix (ref.fa)
     """
 
 # Run bbmap using command line script
