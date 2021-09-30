@@ -4,6 +4,13 @@ Copyright: (c) Shahid HADI, 2021 Author: Shahid HADI Contact: shahid_b89@hotmail
 
 FindIntSite.py is a handy, fast, easy to use, fully automated and all-purpose tool that can be used to detect any kind of integration sites in any context. The main concept is mapping the whole genome sequencing (WGS) data against the inserted sequence and then returning overhanging sequences (OVS). It works as an automated workflow that arranges a traffic between third party aligner programs, BBmap (Bushnell, 2015) and Clustal omega (Sievers et al., 2014), and our Python script Then, the overhanging sequences are searched for using BLAT to find the exact integration post at one nucleotide resolution.
 
+Dependencies:
+
+bbmap available at http://sourceforge.net/projects/bbmap/
+Note that bbmap is written in Java. So Java should be installed. 
+
+Clustalo available at https://anaconda.org/bioconda/clustalo
+
 
 FindIntSite.py takes takes a max to two WGS files in FASTQ format (WGS_file_1.fq, WGS_file_2.fq), and one file that contains the inserted sequence in FASTA format (insertted_seq.fa)
 
