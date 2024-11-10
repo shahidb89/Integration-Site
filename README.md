@@ -10,6 +10,17 @@ Here is a `README.md` file for the `FindIntSite.py` script, designed to provide 
 - **Shahid HADI** (c) 2021
 - **Contact**: [shahid_b89@hotmail.com](mailto:shahid_b89@hotmail.com)
 
+## **Description**
+It is important to have tools for transgene insertion site discovery, as many gene therapy clinical trials use viral vectors that have the tendency to insert randomly into active transcriptionally active regions. This can be an issue if the function of important genes is disrupted. For a better comprehension of what is going on under the hood and to better understand the importance and scope of FindIntSite, we will go through an entire procedure that begins with gene insertion and ends with the discovery of insertion sites.
+1. A therapeutic gene, we call it inserted gene, is inserted into a host genome that has a defective gene.
+2. Whole Genome Sequencing, WGS, is performed for the genome after the insertion of the therapeutic (inserted) gene. From this step onwards, **FindIntSite** starts to do an amazing job.
+3. Using **BBMap**, **FindIntSite** maps the inserted sequence on the WGS results of the host genome to find where the inserted gene has been inserted across the host genome. This mapping returns multiple sequences that are known as Overhanging Sequences, OVS. These are sequences that contain parts of the host genome at each insertion site and parts of the inserted sequence.
+4. **FindIntSite** further processes the OVSes by splitting them into two distinct sequences, separating the inserted genome part from the host genome part. This is done by mapping the OVSes onto the inserted sequence using **Clustal Omega**.
+5. Then, **FindIntSite** further processes host genome sequences to identify unique insertion sites and return the longest sequence at each insertion site while getting rid of shorter sequences that belong to the same unique insertion site.
+6. **FindIntSite** then returns as many insertion sites that have been captured by the WGS. It is important to mention that:
+    - **FindIntSite** can return multiple insertion sites. As many as present in the WGS and captured by BBMap.
+    - **FindIntSite** indicates where the inserted sequence lies relative to the returned sequence., i.e does the inserted sequence lie to the 5' end or 3' end of the returned host sequence?
+7. Returned sequences are ready to be used for BLAT search.
 ## **Features**
 - **Automated Workflow**: Orchestrates alignment and sequence processing through BBMap and Clustal Omega.
 - **Detects Unique Integration Sites**: Identifies and characterizes overhanging sequences around integration sites.
