@@ -20,9 +20,7 @@ The tool then processes the host genome sequences to identify unique insertion s
 
 The identified integration sites are then ready for further analysis using **BLAT** to pinpoint the exact location of the insertion within the genome.
 
----
 
-This revision maintains the technical content while improving readability and clarity.
 ## **Features**
 - **Automated Workflow**: Orchestrates alignment and sequence processing through BBMap and Clustal Omega.
 - **Detects Unique Integration Sites**: Identifies and characterizes overhanging sequences around integration sites.
