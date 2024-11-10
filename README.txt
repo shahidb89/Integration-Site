@@ -1,49 +1,82 @@
-FindIntSite.py
+Here is a `README.md` file for the `FindIntSite.py` script, designed to provide a clear introduction, installation guidance, usage instructions, and output examples.
 
-Copyright: (c) Shahid HADI, 2021 Author: Shahid HADI Contact: shahid_b89@hotmail.com
+---
 
-FindIntSite.py is a handy, fast, easy to use, fully automated and all-purpose tool that can be used to detect any kind of integration sites in any context. The main concept is mapping the whole genome sequencing (WGS) data against the inserted sequence and then returning overhanging sequences (OVS). It works as an automated workflow that arranges a traffic between third party aligner programs, BBmap (Bushnell, 2015) and Clustal omega (Sievers et al., 2014), and our Python script Then, the overhanging sequences are searched for using BLAT to find the exact integration post at one nucleotide resolution.
+# **FindIntSite.py**
 
-Dependencies:
+**FindIntSite.py** is a fast, automated Python tool for detecting integration sites of inserted DNA sequences in gene-editing and genetic engineering contexts. Leveraging the alignment power of BBMap and Clustal Omega, this tool processes whole genome sequencing (WGS) data, finds unique overhanging sequences (OVS), and prepares them for further search via BLAT to pinpoint integration sites at single-nucleotide precision.
 
-bbmap available at http://sourceforge.net/projects/bbmap/
-Note that bbmap is written in Java. So Java should be installed. 
+### **Author**
+- **Shahid HADI** (c) 2021
+- **Contact**: [shahid_b89@hotmail.com](mailto:shahid_b89@hotmail.com)
 
-Clustalo available at https://anaconda.org/bioconda/clustalo
+## **Features**
+- **Automated Workflow**: Orchestrates alignment and sequence processing through BBMap and Clustal Omega.
+- **Detects Unique Integration Sites**: Identifies and characterizes overhanging sequences around integration sites.
+- **Detailed Output**: Provides sequences with nucleotide counts and overlap information, facilitating BLAT search for integration site analysis.
 
+## **Dependencies**
+To use **FindIntSite**, install the following dependencies:
 
-FindIntSite.py takes takes a max to two WGS files in FASTQ format (WGS_file_1.fq, WGS_file_2.fq), and one file that contains the inserted sequence in FASTA format (insertted_seq.fa)
+- **BBMap**: [Download here](http://sourceforge.net/projects/bbmap/) (Requires Java).
+- **Clustal Omega**: [Available on Anaconda](https://anaconda.org/bioconda/clustalo).
 
-The command line input syntax is as follows:
-python  FindIntSite.py -in1 WGS_file_1.fq -in2 WGS_file_2.fq -ref inserted_seq.fa 
+## **Installation**
 
-Note that the second WGS input file is optional. So that the following command will work too:
+1. Install **BBMap** and **Clustal Omega** as per their respective instructions.
+2. Ensure Python 3 is installed.
 
-python  FindIntSite.py -in1 WGS_file_1.fq -ref inserted_seq.fa 
+## **Usage**
 
-A text file is returned that contains all the OVS being divided into two groups (Figure 4). OVS to the start of the reference (inserted) sequence, and OVS to the of the reference sequence. Each sequence is followed by two numbers. The first one represents the number of overlapping sequences between the returned sequence and the reference sequence and the second one represents the number of nucleotides in each sequence that map to the reference sequence.
+Run `FindIntSite.py` with the command line, specifying up to two WGS FastQ files (for paired-end sequencing) and a single FASTA file containing the inserted sequence.
 
-Here is how  typical results file looks like with 8 insertion sites:
+```bash
+python FindIntSite.py -in1 WGS_file_1.fq -in2 WGS_file_2.fq -ref inserted_seq.fa
+```
 
-BLAT search ready sequences:git 
+**Command-Line Arguments**:
+- `-in1`, `--input_1`: First WGS FastQ file.
+- `-in2`, `--input_2`: Optional second WGS FastQ file (for paired-end reads).
+- `-ref`, `--inserted_seq`: FASTA file containing the inserted sequence.
+
+If only one WGS file is used, the script works with a single FastQ input:
+
+```bash
+python FindIntSite.py -in1 WGS_file_1.fq -ref inserted_seq.fa
+```
+
+## **Output**
+
+The script generates a text file, `BLAT_ready_seqs.txt`, with identified overhanging sequences at both the start and end of the inserted sequence. Each entry includes the sequence, the number of overlapping sequences with the reference, and the number of nucleotides mapping to the reference. This information can be directly used in BLAT for integration site localization.
+
+### **Example Output**
+
+```plaintext
+BLAT search ready sequences:
 Overhanging sequences at start
 >GTATGCTATCGGGCATGCGCGCTCATATTCTACGTAGGGATAATAATTATCAGTTTATTGTGACAA	17	34
 >AACTTTCGTCCATTGCAGGTACCCCCATCGAGGCTGGGCCCTTCGATACAGTGGTGCTTTTTA	18	37
->TTCGGCCTGGAAAGCAAAAACTTTATGAAAAGGTGTAACCCGCCATCCATGGAAAAACCAGGCGC	18	35
->GCTCGGTGGCGCGTCCGCGCCAGATGGCGATGGCGCTGGCGAAAGAGCTGACTAACCACAGTCTGC	20	34
->TTGTCCGGCAATCCGCCAGTTGTGAATACCGCCCGCATGTCCGGTGCTTTTCAGCCCCAGTTTCCG	16	34
->ATATTTCATGTAAGGTTCATTATGAAATTAACTAAACTTGTACTTGAAAAT	8	49
->CTCATCAGGCTTTTTCACTGGTTTAGCGTTGATCAGACTGTTCATTCCCGCAGCAGTAGTT	18	39
->CAAAAATGGACAAGACTTGATCCTCTTCCATATTCACAGAGAATATTGAATATTGCACATGATTTT	18	34
+...
 
 Overhanging sequences at end
 >AAATTAACTATAACTGATTTGCCATGATGCCCTTTGCAGCCGGAAAGGGCATCTCTTTCAGAAA	18	36
 >CCTATAACGAAAGAAAGTGTTATTGTAGTTCATAATAGCATGAAGCTATACACTCAAATTCGTAA	15	35
->CGCCGAGTAGCTGGTCAGCAGCCACTGAGTCAGGATGCCATCTTTAATAATATCGCGACGCTCG	14	36
->CGGAGATTGGCGATGCGTTTGGTGGTCGTGACCACACGACGGTGCTTCATGCCTGCCGTAAGATC	19	35
->GTTTGCGGAGTAATGTCTCGCTCAACGCGCGGTGCCGTTTCCTGTAATTCGTCAGGGGTGTA	21	38
->TGGTTATCAGATACTAAAAAGTTATTCATTATCGCCCGGGATGTCTTCTTGTCGGGAATTACCC	18	36
->TTAATAGTATAAATTACGGCTGCTATCTTGATAATACCGATATTAATTGGTGCAGCATTGTTTAT	19	35
->TTCAGATCTGTTAGAGAGCGGCAGGAAATTGATTTTGCACCTGTAACATTACTATTGGGG	20	40
+...
+```
+
+## **Explanation of Output Values**
+Each sequence line in `BLAT_ready_seqs.txt` has:
+1. **Overhanging Sequence**: Unique sequence at either end of the inserted DNA.
+2. **Overlap Count**: Number of overlapping reads with the reference sequence.
+3. **Mapped Nucleotides**: Number of nucleotides mapped to the reference, indicating alignment accuracy.
+
+### **References**
+- **BBMap**: Bushnell B. (2015). BBMap: a fast, accurate, splice-aware aligner. 
+- **Clustal Omega**: Sievers, F. et al. (2014). Fast, scalable generation of high-quality protein multiple sequence alignments using Clustal Omega.
+
+## **License**
+This script and documentation are copyrighted to Shahid HADI, 2021.
+
+
 
 
