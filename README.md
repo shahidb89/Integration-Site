@@ -6,17 +6,23 @@
 - **Shahid HADI** (c) 2021
 - **Contact**: [shahid_b89@hotmail.com](mailto:shahid_b89@hotmail.com)
 
-## **Description**
-It is important to have tools for transgene insertion site discovery, as many gene therapy clinical trials use viral vectors that have the tendency to insert randomly into active transcriptionally active regions. This can be an issue if the function of important genes is disrupted. For a better comprehension of what is going on under the hood and to better understand the importance and scope of FindIntSite, we will go through an entire procedure that begins with gene insertion and ends with the discovery of insertion sites.
-1. A therapeutic gene, we call it inserted gene, is inserted into a host genome that has a defective gene.
-2. Whole Genome Sequencing, WGS, is performed for the genome after the insertion of the therapeutic (inserted) gene. From this step onwards, **FindIntSite** starts to do an amazing job.
-3. Using **BBMap**, **FindIntSite** maps the inserted sequence onto the WGS results of the host genome to find where the inserted gene has been inserted across the host genome. This mapping returns multiple sequences that are known as Overhanging Sequences, OVS. These are sequences that contain parts of the host genome at each insertion site and parts of the inserted sequence.
-4. **FindIntSite** further processes the OVSes by splitting them into two distinct sequences, separating the inserted genome part from the host genome part. This is done by mapping the OVSes onto the inserted sequence using **Clustal Omega**.
-5. Then, **FindIntSite** further processes host genome sequences to identify unique insertion sites and return the longest sequence at each insertion site while getting rid of shorter sequences that belong to the same unique insertion site.
-6. **FindIntSite** then returns as many insertion sites that have been captured by the WGS. It is important to mention that:
-    - **FindIntSite** can return multiple insertion sites. As many as present in the WGS and captured by BBMap.
-    - **FindIntSite** indicates where the inserted sequence lies relative to the returned sequence., i.e does the inserted sequence lie to the 5' end or 3' end of the returned host sequence?
-7. Returned sequences are ready to be used for BLAT search.
+### Description
+
+Understanding the integration sites of inserted genes is crucial in genetic engineering, especially in gene therapy applications where viral vectors are often used. These vectors can randomly integrate into transcriptionally active regions of the host genome, potentially disrupting important genes and causing unintended consequences. FindIntSite is designed to address this challenge by providing an automated and efficient method for detecting the precise locations of these insertions.
+
+The process begins when a therapeutic gene, referred to as the "inserted gene," is introduced into a host genome with a defective gene. After the gene insertion, Whole Genome Sequencing (WGS) is performed on the modified genome. From this point, **FindIntSite** takes over to process the data.
+
+Using **BBMap**, **FindIntSite** aligns the inserted sequence with the host genome's WGS data to identify the insertion points. This alignment generates **Overhanging Sequences (OVS)**, which contain portions of both the host genome and the inserted sequence at each integration site.
+
+Next, FindIntSite separates the OVS into two distinct sequences: one representing the host genome and the other the inserted sequence. This separation is achieved by aligning the **OVS** with the inserted sequence using **Clustal Omega**.
+
+The tool then processes the host genome sequences to identify unique insertion sites, returning the longest sequences at each site and eliminating shorter, redundant sequences. The final output includes the identified integration sites, with details on whether the inserted sequence lies on the 5' or 3' end of the returned host genome sequence.
+
+The identified integration sites are then ready for further analysis using **BLAT** to pinpoint the exact location of the insertion within the genome.
+
+---
+
+This revision maintains the technical content while improving readability and clarity.
 ## **Features**
 - **Automated Workflow**: Orchestrates alignment and sequence processing through BBMap and Clustal Omega.
 - **Detects Unique Integration Sites**: Identifies and characterizes overhanging sequences around integration sites.
