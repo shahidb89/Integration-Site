@@ -1,7 +1,3 @@
-Here is a `README.md` file for the `FindIntSite.py` script, designed to provide a clear introduction, installation guidance, usage instructions, and output examples.
-
----
-
 # **FindIntSite.py**
 
 **FindIntSite.py** is a fast, automated Python tool for detecting integration sites of inserted DNA sequences in gene-editing and genetic engineering contexts. Leveraging the alignment power of BBMap and Clustal Omega, this tool processes whole genome sequencing (WGS) data, finds unique overhanging sequences (OVS), and prepares them for further search via BLAT to pinpoint integration sites at single-nucleotide precision.
