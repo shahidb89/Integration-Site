@@ -14,9 +14,9 @@ The process begins when a therapeutic gene, referred to as the "inserted gene," 
 
 Using **BBMap**, **FindIntSite** aligns the inserted sequence with the host genome's WGS data to identify the insertion points. This alignment generates **Overhanging Sequences (OVS)**, which contain portions of both the host genome and the inserted sequence at each integration site.
 
-Next, FindIntSite separates the OVS into two distinct sequences: one representing the host genome and the other the inserted sequence. This separation is achieved by aligning the **OVS** with the inserted sequence using **Clustal Omega**.
+Next, **FindIntSite** separates the **OVS** into two distinct sequences: one representing the host genome and the other the inserted sequence. This separation is achieved by aligning the **OVS** with the inserted sequence using **Clustal Omega**.
 
-The tool then processes the host genome sequences to identify unique insertion sites, returning the longest sequences at each site and eliminating shorter, redundant sequences. The final output includes the identified integration sites, with details on whether the inserted sequence lies on the 5' or 3' end of the returned host genome sequence.
+**FindIntSite** then processes the host genome sequences to identify unique insertion sites, returning the longest sequences at each site and eliminating shorter, redundant sequences. The final output includes the identified integration sites, with details on whether the inserted sequence lies on the 5' or 3' end of the returned host genome sequence.
 
 The identified integration sites are then ready for further analysis using **BLAT** to pinpoint the exact location of the insertion within the genome.
 
