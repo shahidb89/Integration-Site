@@ -1,9 +1,10 @@
 # **FindIntSite.py**
+Updated Feb 2025
 
 **FindIntSite.py** is a fast, automated Python tool for detecting integration sites of inserted DNA sequences in gene-editing and genetic engineering contexts. Leveraging the alignment power of BBMap and Clustal Omega, this tool processes whole genome sequencing (WGS) data, finds unique overhanging sequences (OVS), and prepares them for further search via BLAT to pinpoint integration sites at single-nucleotide precision.
 
 ### **Author**
-- **Shahid HADI** (c) 2021
+- **Shahid HADI** 
 - **Contact**: [shahid_b89@hotmail.com](mailto:shahid_b89@hotmail.com)
 
 ### Description
@@ -32,6 +33,14 @@ To use **FindIntSite**, install the following dependencies:
 - **BBMap**: [Download here](http://sourceforge.net/projects/bbmap/) (Requires Java).
 - **Clustal Omega**: [Available on Anaconda](https://anaconda.org/bioconda/clustalo).
 
+Alternatively you can download dependecies from the terminal by wrtiring the followning commands:
+```bash
+conda install bbmap
+```
+```bash
+conda install clustalo
+```
+
 ## **Installation**
 
 1. Install **BBMap** and **Clustal Omega** as per their respective instructions.
@@ -39,7 +48,7 @@ To use **FindIntSite**, install the following dependencies:
 
 ## **Usage**
 
-Run `FindIntSite.py` with the command line, specifying up to two WGS FastQ files (for paired-end sequencing) and a single FASTA file containing the inserted sequence.
+Run `FindIntSite.py` with the command line, specifying up to two WGS FastQ files and a single FASTA file containing the inserted sequence.
 
 ```bash
 python FindIntSite.py -in1 WGS_file_1.fq -in2 WGS_file_2.fq -ref inserted_seq.fa
@@ -58,35 +67,33 @@ python FindIntSite.py -in1 WGS_file_1.fq -ref inserted_seq.fa
 
 ## **Output**
 
-The script generates a text file, `BLAT_ready_seqs.txt`, with identified overhanging sequences at both the start and end of the inserted sequence. Each entry includes the sequence, the number of overlapping sequences with the reference, and the number of nucleotides mapping to the reference. This information can be directly used in BLAT for integration site localization.
+The script generates a text file, `BLAT_ready_seqs.txt`, with identified overhanging sequences at both the 5' and 3' ends of the inserted sequence. Each entry includes the sequence and a number separated by colon. The number is the number of the overlapping sequences between the give sequence and the inserted sequence. It can be used as a metric to measure the credibility of the results. The higher the number, the more reliable the reurned sequence is. This information can be directly used in BLAT for integration site localization.
 
 ### **Example Output**
 
 ```plaintext
 BLAT search ready sequences:
-Overhanging sequences at start
->GTATGCTATCGGGCATGCGCGCTCATATTCTACGTAGGGATAATAATTATCAGTTTATTGTGACAA	17	34
->AACTTTCGTCCATTGCAGGTACCCCCATCGAGGCTGGGCCCTTCGATACAGTGGTGCTTTTTA	18	37
-...
+ Overhanging sequences at 5' end
+GTTTGCTCATCAGGCTTTTTCACTGGTTTAGCGTTGATCAGACTGTTCATTCCCGCAGCAGTAGTT: 16
+TTGTCCGGCAATCCGCCAGTTGTGAATACCGCCCGCATGTCCGGTGCTTTTCAGCCCCAGTTTCCG: 17
 
-Overhanging sequences at end
->AAATTAACTATAACTGATTTGCCATGATGCCCTTTGCAGCCGGAAAGGGCATCTCTTTCAGAAA	18	36
->CCTATAACGAAAGAAAGTGTTATTGTAGTTCATAATAGCATGAAGCTATACACTCAAATTCGTAA	15	35
-...
+Overhanging sequences at 3' end
+GTTTGCGGAGTAATGTCTCGCTCAACGCGCGGTGCCGTTTCCTGTAATTCGTCAGGGGTGTAAACA: 22
+CGCCGAGTAGCTGGTCAGCAGCCACTGAGTCAGGATGCCATCTTTAATAATATCGCGACGCTCGGT: 16
 ```
 
 ## **Explanation of Output Values**
 Each sequence line in `BLAT_ready_seqs.txt` has:
 1. **Overhanging Sequence**: Unique sequence at either end of the inserted DNA.
-2. **Overlap Count**: Number of overlapping reads with the reference sequence.
-3. **Mapped Nucleotides**: Number of nucleotides mapped to the reference, indicating alignment accuracy.
+2. **Overlap Count**: Number of overlapping reads with the inserted sequence.
+
 
 ### **References**
 - **BBMap**: Bushnell B. (2015). BBMap: a fast, accurate, splice-aware aligner. 
 - **Clustal Omega**: Sievers, F. et al. (2014). Fast, scalable generation of high-quality protein multiple sequence alignments using Clustal Omega.
 
 ## **License**
-This script and documentation are copyrighted to Shahid HADI, 2021.
+This project is licensed under the MIT License.
 
 
 
